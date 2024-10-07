@@ -21,7 +21,7 @@ export const Experience = () => {
       </TeleportTarget>
 
       <mesh
-        pointerEventsType={{ allow: "grab" }}
+        pointerEventsType={{ deny: "grab" }}
         onClick={() => setRed(!red)}
         position={[0, 1, -1]}
       >
