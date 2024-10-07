@@ -6,7 +6,7 @@ export const Experience = () => {
   return (
     <>
       <mesh
-        pointerEventsType={{ deny: "grab" }}
+        pointerEventsType={{ allow: "grab" }}
         onClick={() => setRed(!red)}
         position={[0, 1, -1]}
       >
