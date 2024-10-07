@@ -14,7 +14,7 @@ function App() {
         </XR>
       </Canvas>
       <button
-        onClick={() => store.enterAR()}
+        onClick={() => store.enterVR()}
         className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white py-2 px-4 rounded"
       >
         Enter AR
