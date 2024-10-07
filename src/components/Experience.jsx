@@ -1,10 +1,20 @@
-import { useState } from "react";
+import { TeleportTarget, XROrigin } from "@react-three/xr";
+import { useRef, useState } from "react";
+import { Vector3 } from "three";
 
 export const Experience = () => {
   const [red, setRed] = useState(false);
-
+  const [position, setPosition] = useState(new Vector3());
   return (
     <>
+      <XROrigin />
+      <TeleportTarget onTeleport={setPosition}>
+        <mesh scale={[10, 1, 10]} position={[0, -0.5, 0]}>
+          <boxGeometry />
+          <meshBasicMaterial color="green" />
+        </mesh>
+      </TeleportTarget>
+
       <mesh
         pointerEventsType={{ allow: "grab" }}
         onClick={() => setRed(!red)}
@@ -13,34 +23,6 @@ export const Experience = () => {
         <boxGeometry />
         <meshBasicMaterial color={red ? "red" : "blue"} />
       </mesh>
-      <DraggableCube />
     </>
   );
 };
-
-function DraggableCube() {
-  const isDraggingRef = useRef(false);
-  const meshRef = useRef < Mesh > null;
-
-  return (
-    <mesh
-      ref={meshRef}
-      onPointerDown={(e) => {
-        if (isDraggingRef.current) {
-          return;
-        }
-        isDraggingRef.current = true;
-        meshRef.position.copy(e.point);
-      }}
-      onPointerMove={(e) => {
-        if (!isDraggingRef.current) {
-          return;
-        }
-        meshRef.position.copy(e.point);
-      }}
-      onPointerUp={(e) => (isDraggingRef.current = false)}
-    >
-      <boxGeometry />
-    </mesh>
-  );
-}

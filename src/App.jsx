@@ -1,15 +1,18 @@
 import { Canvas } from "@react-three/fiber";
 import { Experience } from "./components/Experience";
-import { XR, createXRStore } from "@react-three/xr";
+import { XR, XROrigin, createXRStore } from "@react-three/xr";
 
-const store = createXRStore();
+const store = createXRStore({
+  hand: { teleportPointer: true },
+  controller: { teleportPointer: true },
+});
 
 function App() {
   return (
     <div className="relative h-screen">
-      <Canvas shadows camera={{ position: [3, 3, 3], fov: 30 }}>
+      <Canvas>
         <XR store={store}>
-          <color attach="background" args={["#ececec"]} />
+          <ambientLight />
           <Experience />
         </XR>
       </Canvas>
