@@ -2,7 +2,7 @@ import { Canvas } from "@react-three/fiber";
 import { Experience } from "./components/Experience";
 import { XR, XROrigin, createXRStore } from "@react-three/xr";
 
-const store = createXRStore();
+const store = createXRStore({ controller: { grip: true, pointer: true } });
 
 function App() {
   return (

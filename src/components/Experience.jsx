@@ -5,7 +5,7 @@ import {
   XROrigin,
 } from "@react-three/xr";
 import { useRef, useState } from "react";
-import { Vector3 } from "three";
+import { Vector3, Euler } from "three";
 
 export const Experience = () => {
   const [red, setRed] = useState(false);
@@ -35,7 +35,9 @@ export const Experience = () => {
 function Locomotion() {
   const controller = useXRInputSourceState("controller", "right");
   const ref = useRef();
-  useFrame((_, delta) => {
+  const cameraRef = useRef();
+
+  useFrame((state, delta) => {
     if (ref.current == null || controller == null) {
       return;
     }
@@ -44,18 +46,22 @@ function Locomotion() {
       return;
     }
 
-    // Get the player's current rotation
-    const rotation = ref.current.rotation.y;
+    // Get the camera's world quaternion
+    const cameraQuaternion = state.camera.quaternion;
+    const euler = new Euler().setFromQuaternion(cameraQuaternion, "YXZ");
+    const yRotation = euler.y;
 
-    // Calculate the direction based on the player's rotation
-    const direction = new Vector3(
-      (thumbstickState.xAxis ?? 0) * delta,
-      0,
-      (thumbstickState.yAxis ?? 0) * delta
-    ).applyAxisAngle(new Vector3(0, 1, 0), rotation);
+    // Calculate movement direction based on the y-axis rotation
+    const moveX = (thumbstickState.xAxis ?? 0) * delta;
+    const moveZ = (thumbstickState.yAxis ?? 0) * delta;
+    const direction = new Vector3(moveX, 0, moveZ).applyAxisAngle(
+      new Vector3(0, 1, 0),
+      yRotation
+    );
 
-    // Apply the direction to the player's position
-    ref.current.position.add(direction);
+    ref.current.position.x += direction.x;
+    ref.current.position.z += direction.z;
   });
-  return <XROrigin ref={ref} />;
+
+  return <XROrigin ref={ref} camera={{ ref: cameraRef }} />;
 }
