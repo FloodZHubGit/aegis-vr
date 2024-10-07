@@ -39,12 +39,23 @@ function Locomotion() {
     if (ref.current == null || controller == null) {
       return;
     }
-    const thumstickState = controller.gamepad["xr-standard-thumbstick"];
-    if (thumstickState == null) {
+    const thumbstickState = controller.gamepad["xr-standard-thumbstick"];
+    if (thumbstickState == null) {
       return;
     }
-    ref.current.position.x += (thumstickState.xAxis ?? 0) * delta;
-    ref.current.position.z += (thumstickState.yAxis ?? 0) * delta;
+
+    // Get the player's current rotation
+    const rotation = ref.current.rotation.y;
+
+    // Calculate the direction based on the player's rotation
+    const direction = new Vector3(
+      (thumbstickState.xAxis ?? 0) * delta,
+      0,
+      (thumbstickState.yAxis ?? 0) * delta
+    ).applyAxisAngle(new Vector3(0, 1, 0), rotation);
+
+    // Apply the direction to the player's position
+    ref.current.position.add(direction);
   });
   return <XROrigin ref={ref} />;
 }
