@@ -7,7 +7,7 @@ export const Experience = () => {
   const [position, setPosition] = useState(new Vector3());
   return (
     <>
-      <XROrigin />
+      <XROrigin position={position} />
       <TeleportTarget onTeleport={setPosition}>
         <mesh scale={[10, 1, 10]} position={[0, -0.5, 0]}>
           <boxGeometry />
