@@ -9,7 +9,7 @@ import { Quaternion, Vector3 } from "three";
 import { useXRInputSourceStateContext, XRHandModel } from "@react-three/xr";
 
 export function Hand() {
-  const handState = useXRInputSourceStateContext("hand");
+  const handState = useXRInputSourceStateContext("controller");
   return (
     <>
       <Suspense>
