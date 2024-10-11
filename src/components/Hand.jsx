@@ -6,10 +6,10 @@ import { state } from "../state.js";
 import { Suspense } from "react";
 import { useFrame } from "@react-three/fiber";
 import { Quaternion, Vector3 } from "three";
-import { useXRHandState, XRHandModel } from "@react-three/xr";
+import { useXRInputSourceStateContext, XRHandModel } from "@react-three/xr";
 
 export function Hand() {
-  const handState = useXRHandState();
+  const handState = useXRInputSourceStateContext("hand");
   return (
     <>
       <Suspense>

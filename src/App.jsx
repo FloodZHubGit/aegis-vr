@@ -113,7 +113,7 @@ function Ball() {
         <BallCollider args={[0.02]} />
         <mesh castShadow receiveShadow>
           <sphereGeometry args={[0.02, 64, 64]} />
-          <meshStandardMaterial />
+          <meshStandardMaterial color="red" /> {/* Change color here */}
         </mesh>
       </RigidBody>
       <RigidBody
