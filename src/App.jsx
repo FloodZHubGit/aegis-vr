@@ -13,7 +13,7 @@ import { Suspense } from "react";
 import { Hand } from "./components/Hand.jsx";
 import { state } from "./state.js";
 
-const store = createXRStore({ hand: Hand });
+const store = createXRStore({ controller: { left: false, right: Hand } });
 
 export default function App() {
   return (
