@@ -4,7 +4,7 @@ import { XR, XROrigin, createXRStore } from "@react-three/xr";
 
 const store = createXRStore({
   hand: { left: { rayPointer: true }, right: { rayPointer: true } },
-  controller: { teleportPointer: true },
+  controller: { left: { rayPointer: true }, right: { rayPointer: true } },
 });
 
 function App() {
