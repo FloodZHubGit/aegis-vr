@@ -1,37 +1,38 @@
 import { TeleportTarget, XROrigin } from "@react-three/xr";
 import { useRef, useState, useEffect } from "react";
 import { Vector3 } from "three";
+import { Book } from "./Book";
 
 export const Experience = () => {
   const [red, setRed] = useState(false);
   const [position, setPosition] = useState(new Vector3());
   const [targets, setTargets] = useState([]);
 
-  // Function to spawn a new target
-  const spawnTarget = () => {
-    const newTarget = {
-      id: Math.random().toString(36).substr(2, 9),
-      position: new Vector3(
-        Math.random() * 10 - 5,
-        Math.random() * 5,
-        Math.random() * -10
-      ),
-    };
-    setTargets((prevTargets) => [...prevTargets, newTarget]);
-  };
+  // // Function to spawn a new target
+  // const spawnTarget = () => {
+  //   const newTarget = {
+  //     id: Math.random().toString(36).substr(2, 9),
+  //     position: new Vector3(
+  //       Math.random() * 10 - 5,
+  //       Math.random() * 5,
+  //       Math.random() * -10
+  //     ),
+  //   };
+  //   setTargets((prevTargets) => [...prevTargets, newTarget]);
+  // };
 
-  // Function to delete a target
-  const deleteTarget = (id) => {
-    setTargets((prevTargets) =>
-      prevTargets.filter((target) => target.id !== id)
-    );
-  };
+  // // Function to delete a target
+  // const deleteTarget = (id) => {
+  //   setTargets((prevTargets) =>
+  //     prevTargets.filter((target) => target.id !== id)
+  //   );
+  // };
 
-  // Spawn a new target every 2 seconds
-  useEffect(() => {
-    const interval = setInterval(spawnTarget, 2000);
-    return () => clearInterval(interval);
-  }, []);
+  // // Spawn a new target every 2 seconds
+  // useEffect(() => {
+  //   const interval = setInterval(spawnTarget, 2000);
+  //   return () => clearInterval(interval);
+  // }, []);
 
   return (
     <>
@@ -43,6 +44,10 @@ export const Experience = () => {
         </mesh>
       </TeleportTarget>
 
+      <TeleportTarget onTeleport={setPosition}>
+        <Book />
+      </TeleportTarget>
+
       <mesh
         pointerEventsType={{ deny: "grab" }}
         onClick={() => setRed(!red)}
@@ -52,7 +57,7 @@ export const Experience = () => {
         <meshBasicMaterial color={red ? "red" : "blue"} />
       </mesh>
 
-      {targets.map((target) => (
+      {/* {targets.map((target) => (
         <mesh
           key={target.id}
           position={target.position}
@@ -61,7 +66,7 @@ export const Experience = () => {
           <sphereGeometry args={[0.5, 32, 32]} />
           <meshBasicMaterial color="yellow" />
         </mesh>
-      ))}
+      ))} */}
     </>
   );
 };
