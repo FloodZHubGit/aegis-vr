@@ -13,7 +13,9 @@ import { Suspense } from "react";
 import { state } from "./state.js";
 import { Experience } from "./components/Experience.jsx";
 
-const store = createXRStore();
+const store = createXRStore({
+  controller: { left: { teleportPointer }, right: { rayPointer } },
+});
 
 export default function App() {
   return (
