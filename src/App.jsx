@@ -10,11 +10,10 @@ import {
 } from "@react-three/rapier";
 import { createXRStore, XR, XROrigin } from "@react-three/xr";
 import { Suspense } from "react";
-import { Hand } from "./components/Hand.jsx";
 import { state } from "./state.js";
 import { Experience } from "./components/Experience.jsx";
 
-const store = createXRStore({ controller: { left: false, right: Hand } });
+const store = createXRStore();
 
 export default function App() {
   return (
