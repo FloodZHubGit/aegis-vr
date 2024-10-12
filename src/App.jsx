@@ -1,119 +1,29 @@
-import * as THREE from "three";
-import { useCallback, useRef } from "react";
-import { Canvas, useThree } from "@react-three/fiber";
-import { useTexture } from "@react-three/drei";
-import {
-  Physics,
-  RigidBody,
-  CuboidCollider,
-  BallCollider,
-} from "@react-three/rapier";
-import { createXRStore, XR, XROrigin } from "@react-three/xr";
-import { Suspense } from "react";
-import { state } from "./state.js";
-import { Experience } from "./components/Experience.jsx";
+import { Canvas } from "@react-three/fiber";
+import { Experience } from "./components/Experience";
+import { XR, XROrigin, createXRStore } from "@react-three/xr";
 
 const store = createXRStore({
-  controller: { left: { teleportPointer }, right: { rayPointer } },
+  hand: { teleportPointer: true },
+  controller: { teleportPointer: true },
 });
 
-export default function App() {
+function App() {
   return (
-    <>
-      <div
-        style={{
-          display: "flex",
-          flexDirection: "row",
-          gap: "1rem",
-          position: "absolute",
-          zIndex: 10000,
-          bottom: "1rem",
-          left: "50%",
-          transform: "translate(-50%, 0)",
-        }}
-      >
-        <button
-          style={{
-            background: "black",
-            borderRadius: "0.5rem",
-            border: "none",
-            fontWeight: "bold",
-            color: "white",
-            padding: "1rem 2rem",
-            cursor: "pointer",
-            fontSize: "1.5rem",
-            boxShadow: "0px 0px 20px rgba(0,0,0,1)",
-          }}
-          onClick={() => store.enterAR()}
-        >
-          Enter AR
-        </button>
-        <button
-          style={{
-            background: "black",
-            borderRadius: "0.5rem",
-            border: "none",
-            fontWeight: "bold",
-            color: "white",
-            padding: "1rem 2rem",
-            cursor: "pointer",
-            fontSize: "1.5rem",
-            boxShadow: "0px 0px 20px rgba(0,0,0,1)",
-          }}
-          onClick={() => store.enterVR()}
-        >
-          Enter VR
-        </button>
-      </div>
-      <Canvas shadows dpr={[1, 1.5]}>
-        <Physics maxCcdSubsteps={10} gravity={[0, -5, 0]} timeStep="vary">
-          <XR store={store}>
-            <color attach="background" args={["#f0f0f0"]} />
-            <ambientLight intensity={0.5 * Math.PI} />
-            <Experience />
-          </XR>
-        </Physics>
+    <div className="relative h-screen">
+      <Canvas>
+        <XR store={store}>
+          <ambientLight />
+          <Experience />
+        </XR>
       </Canvas>
-    </>
+      <button
+        onClick={() => store.enterVR()}
+        className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-blue-500 text-white py-2 px-4 rounded"
+      >
+        Enter AR
+      </button>
+    </div>
   );
 }
 
-function Ball() {
-  const api = useRef();
-  const onCollisionEnter = useCallback(() => {
-    state.api.reset();
-    api.current.resetForces(true);
-    api.current.resetTorques(true);
-    api.current.setTranslation({ x: 0, y: 2, z: -0.5 });
-    api.current.setAngvel({ x: 0, y: 0, z: 0 });
-    api.current.setLinvel({ x: 0, y: 2, z: 0 });
-  }, []);
-  return (
-    <>
-      <RigidBody
-        ccd
-        ref={api}
-        angularDamping={0.1}
-        restitution={1.5}
-        canSleep={false}
-        colliders={false}
-        enabledTranslations={[true, true, false]}
-      >
-        <BallCollider args={[0.02]} />
-        <mesh castShadow receiveShadow>
-          <sphereGeometry args={[0.02, 64, 64]} />
-          <meshStandardMaterial color="red" /> {/* Change color here */}
-        </mesh>
-      </RigidBody>
-      <RigidBody
-        type="fixed"
-        colliders={false}
-        position={[0, -3, 0]}
-        restitution={2.1}
-        onCollisionEnter={onCollisionEnter}
-      >
-        <CuboidCollider args={[1000, 2, 1000]} />
-      </RigidBody>
-    </>
-  );
-}
+export default App;
