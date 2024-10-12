@@ -20,6 +20,8 @@ export const Experience = () => {
         </mesh>
       </TeleportTarget>
 
+      <XROrigin position={position} />
+
       <mesh
         pointerEventsType={{ deny: "grab" }}
         onClick={() => setRed(!red)}

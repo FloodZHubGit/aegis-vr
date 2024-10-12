@@ -12,6 +12,7 @@ import { createXRStore, XR, XROrigin } from "@react-three/xr";
 import { Suspense } from "react";
 import { Hand } from "./components/Hand.jsx";
 import { state } from "./state.js";
+import { Experience } from "./components/Experience.jsx";
 
 const store = createXRStore({ controller: { left: false, right: Hand } });
 
@@ -68,20 +69,7 @@ export default function App() {
           <XR store={store}>
             <color attach="background" args={["#f0f0f0"]} />
             <ambientLight intensity={0.5 * Math.PI} />
-            <spotLight
-              decay={0}
-              position={[-10, 15, -5]}
-              angle={1}
-              penumbra={1}
-              intensity={2}
-              castShadow
-              shadow-mapSize={1024}
-              shadow-bias={-0.0001}
-            />
-            <Suspense>
-              <Ball />
-            </Suspense>
-            <XROrigin />
+            <Experience />
           </XR>
         </Physics>
       </Canvas>
