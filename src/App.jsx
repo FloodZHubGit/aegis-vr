@@ -3,7 +3,7 @@ import { Experience } from "./components/Experience";
 import { XR, XROrigin, createXRStore } from "@react-three/xr";
 
 const store = createXRStore({
-  hand: { teleportPointer: true },
+  hand: { left: { teleportPointer: true }, right: { rayPointer: true } },
   controller: { teleportPointer: true },
 });
 
