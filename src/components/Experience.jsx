@@ -2,6 +2,7 @@ import { TeleportTarget, XROrigin } from "@react-three/xr";
 import { useRef, useState, useEffect } from "react";
 import { Vector3 } from "three";
 import { Book } from "./Book";
+import { Classroom } from "./Classroom";
 
 export const Experience = () => {
   const [red, setRed] = useState(false);
@@ -44,9 +45,7 @@ export const Experience = () => {
         </mesh>
       </TeleportTarget>
 
-      <TeleportTarget onTeleport={setPosition}>
-        <Book />
-      </TeleportTarget>
+      <Classroom />
 
       <mesh
         pointerEventsType={{ deny: "grab" }}
