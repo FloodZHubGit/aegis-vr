@@ -49,18 +49,6 @@ export function Classroom({ currentScreen, ...props }) {
         position={[4.2, 2.106, -7.918]}
         rotation={[-Math.PI / 2, 0, -Math.PI]}
       />
-      <Phone
-        scale={0.2}
-        position={[-2.0, 0.85, -2.1]}
-        rotation={[-1.6, 3.2, 0]}
-        currentScreen={currentScreen}
-      />
-      <Laptop
-        position={[3.5, 0.9, -2.3]}
-        scale={0.2}
-        currentScreen={currentScreen}
-      />
-      <VR position={[-2.1, 0.9, 5]} scale={0.3} rotation={[0, 0.8, 0]} />
     </group>
   );
 }
