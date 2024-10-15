@@ -8,9 +8,6 @@ Title: Classroom
 
 import React, { useRef } from "react";
 import { useGLTF } from "@react-three/drei";
-import { Phone } from "./Phone";
-import { Laptop } from "./Laptop";
-import { VR } from "./VR";
 
 export function Classroom({ currentScreen, ...props }) {
   const { nodes, materials } = useGLTF("/models/classroom.glb");
