@@ -1,19 +1,10 @@
 import { myPlayer } from "playroomkit";
 import React, { useState } from "react";
+import { useGameEngine } from "./hooks/useGameEngine";
 
 function App() {
   const { players, isStarted, setSelectedRole, setIsStarted } = useGameEngine();
   const me = myPlayer();
-
-  const handleRoleSelection = (player, role) => {
-    setSelectedRoles((prevRoles) => {
-      const newRoles = { ...prevRoles, [player]: role };
-      if (newRoles.player1 && newRoles.player2) {
-        setIsStarted(true);
-      }
-      return newRoles;
-    });
-  };
 
   return (
     <div>
