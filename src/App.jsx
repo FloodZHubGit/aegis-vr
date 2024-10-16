@@ -1,35 +1,34 @@
-import { Canvas } from "@react-three/fiber";
-import { Experience } from "./components/Experience";
-import { XR, XROrigin, createXRStore } from "@react-three/xr";
-
-const store = createXRStore({
-  hand: { left: { rayPointer: true }, right: { touchPointer: true } },
-  controller: { left: { teleportPointer: true }, right: { rayPointer: true } },
-});
+import { myPlayer } from "playroomkit";
+import React, { useState } from "react";
 
 function App() {
+  const { players, isStarted, setSelectedRole, setIsStarted } = useGameEngine();
+  const me = myPlayer();
+
+  const handleRoleSelection = (player, role) => {
+    setSelectedRoles((prevRoles) => {
+      const newRoles = { ...prevRoles, [player]: role };
+      if (newRoles.player1 && newRoles.player2) {
+        setIsStarted(true);
+      }
+      return newRoles;
+    });
+  };
+
   return (
-    <div className="relative h-screen">
-      <Canvas>
-        <XR store={store}>
-          <ambientLight />
-          <Experience />
-        </XR>
-      </Canvas>
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-4">
-        <button
-          onClick={() => store.enterAR()}
-          className="bg-blue-500 text-white py-2 px-4 rounded"
-        >
-          Enter AR
-        </button>
-        <button
-          onClick={() => store.enterVR()}
-          className="bg-blue-500 text-white py-2 px-4 rounded"
-        >
-          Enter VR
-        </button>
-      </div>
+    <div>
+      {!isStarted && (
+        <div>
+          <button onClick={() => setSelectedRole(me, "Computer")}>
+            Computer Player
+          </button>
+          <button onClick={() => setSelectedRole(me, "VR")}>VR Player</button>
+        </div>
+      )}
+      {isStarted && me.state.playerType === "Computer" && (
+        <div>Computer Player</div>
+      )}
+      {isStarted && me.state.playerType === "VR" && <VR />}
     </div>
   );
 }

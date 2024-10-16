@@ -13,6 +13,7 @@
     "@react-three/fiber": "^8.17.9",
     "@react-three/rapier": "^1.5.0",
     "@react-three/xr": "^6.2.13",
+    "playroomkit": "^0.0.83",
     "r3f-vite-starter": "file:",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
