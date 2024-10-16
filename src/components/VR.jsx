@@ -1,6 +1,7 @@
 import { Canvas } from "@react-three/fiber";
 import { XR, XROrigin, createXRStore } from "@react-three/xr";
 import { Experience } from "./Experience";
+import { useGameEngine } from "../hooks/useGameEngine";
 
 const store = createXRStore({
   hand: { left: { rayPointer: true }, right: { touchPointer: true } },
@@ -8,6 +9,8 @@ const store = createXRStore({
 });
 
 export const VR = () => {
+  const { players, isStarted, setSelectedRole, cubeColor, changeCubeColor } =
+    useGameEngine();
   return (
     <div className="relative h-screen">
       <Canvas>

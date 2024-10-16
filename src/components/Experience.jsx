@@ -1,44 +1,18 @@
 import { TeleportTarget, XROrigin } from "@react-three/xr";
 import { useRef, useState, useEffect } from "react";
 import { Vector3 } from "three";
-import { Book } from "./Book";
 import { Classroom } from "./Classroom";
+import { useGameEngine } from "../hooks/useGameEngine";
 
 export const Experience = () => {
-  const [red, setRed] = useState(false);
-  const [position, setPosition] = useState(new Vector3());
-  const [targets, setTargets] = useState([]);
-
-  // // Function to spawn a new target
-  // const spawnTarget = () => {
-  //   const newTarget = {
-  //     id: Math.random().toString(36).substr(2, 9),
-  //     position: new Vector3(
-  //       Math.random() * 10 - 5,
-  //       Math.random() * 5,
-  //       Math.random() * -10
-  //     ),
-  //   };
-  //   setTargets((prevTargets) => [...prevTargets, newTarget]);
-  // };
-
-  // // Function to delete a target
-  // const deleteTarget = (id) => {
-  //   setTargets((prevTargets) =>
-  //     prevTargets.filter((target) => target.id !== id)
-  //   );
-  // };
-
-  // // Spawn a new target every 2 seconds
-  // useEffect(() => {
-  //   const interval = setInterval(spawnTarget, 2000);
-  //   return () => clearInterval(interval);
-  // }, []);
+  const { players, isStarted, setSelectedRole, cubeColor, changeCubeColor } =
+    useGameEngine();
+  const [playerPosition, setPlayerPosition] = useState(new Vector3());
 
   return (
     <>
-      <XROrigin position={position} />
-      <TeleportTarget onTeleport={setPosition}>
+      <XROrigin position={playerPosition} />
+      <TeleportTarget onTeleport={setPlayerPosition}>
         <mesh scale={[10, 1, 10]} position={[0, -0.5, 0]}>
           <boxGeometry />
           <meshBasicMaterial color="green" />
@@ -49,11 +23,11 @@ export const Experience = () => {
 
       <mesh
         pointerEventsType={{ deny: "grab" }}
-        onClick={() => setRed(!red)}
+        onClick={() => changeCubeColor()}
         position={[0, 1, -1]}
       >
         <boxGeometry />
-        <meshBasicMaterial color={red ? "red" : "blue"} />
+        <meshBasicMaterial color={cubeColor} />
       </mesh>
 
       {/* {targets.map((target) => (

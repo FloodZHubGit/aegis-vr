@@ -9,21 +9,27 @@ import React from "react";
 const GameEngineContext = React.createContext();
 
 export const GameEngineProvider = ({ children }) => {
-  const [isStarted, setIsStarted] = React.useState(false);
+  const [isStarted, setIsStarted] = useMultiplayerState("isStarted", false);
+  const [cubeColor, setCubeColor] = useMultiplayerState("cubeColor", "blue");
 
   const players = usePlayersList(true);
   players.sort((a, b) => a.id.localeCompare(b.id));
 
   const setSelectedRole = (player, role) => {
     player.setState("playerType", role, true);
+    gameSetup();
   };
 
   const gameSetup = () => {
-    if (isHost()) {
-      players.forEach((player) => {
-        player.setState("playerType", "", true);
-      });
+    if (players.every((player) => player.state.playerType)) {
+      setIsStarted(true);
     }
+  };
+
+  const changeCubeColor = () => {
+    const colors = ["red", "green", "blue", "yellow", "purple", "orange"];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    setCubeColor(randomColor);
   };
 
   const gameState = {
@@ -31,6 +37,8 @@ export const GameEngineProvider = ({ children }) => {
     isStarted,
     setSelectedRole,
     gameSetup,
+    cubeColor,
+    changeCubeColor,
   };
 
   return (
