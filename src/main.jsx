@@ -3,6 +3,7 @@ import ReactDOM from "react-dom/client";
 import App from "./App";
 import "./index.css";
 import { insertCoin } from "playroomkit";
+import { GameEngineProvider } from "./hooks/useGameEngine";
 
 insertCoin({
   maxPlayersPerRoom: 2,
