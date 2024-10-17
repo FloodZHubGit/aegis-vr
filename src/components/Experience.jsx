@@ -142,8 +142,6 @@ export const Experience = () => {
 
       <Classroom scale={0.9} />
 
-      <OrbitControls />
-
       {laptops.map((laptop, index) => (
         <Laptop
           key={index}
@@ -152,8 +150,6 @@ export const Experience = () => {
           rotation={laptop.rotation}
         />
       ))}
-
-      <Laptop scale={0.15} position={[1.5, 0.8, -2.0]} rotation={[0, 0, 0]} />
 
       <Laptop
         scale={0.15}
