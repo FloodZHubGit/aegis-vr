@@ -52,6 +52,89 @@ export const Experience = () => {
     return result;
   }, []);
 
+  const getRandomYRotation = () => Math.random() * Math.PI * 2;
+
+  const laptops = useMemo(
+    () => [
+      {
+        scale: 0.15,
+        position: [-2.1, 0.8, -2.0],
+        rotation: [0, getRandomYRotation(), 0],
+      },
+      {
+        scale: 0.15,
+        position: [-2.1, 0.8, 0.3],
+        rotation: [0, getRandomYRotation(), 0],
+      },
+      {
+        scale: 0.15,
+        position: [-2.1, 0.8, 2.5],
+        rotation: [0, getRandomYRotation(), 0],
+      },
+      {
+        scale: 0.15,
+        position: [-0.3, 0.8, -2.0],
+        rotation: [0, getRandomYRotation(), 0],
+      },
+      {
+        scale: 0.15,
+        position: [-0.3, 0.8, 0.3],
+        rotation: [0, getRandomYRotation(), 0],
+      },
+      {
+        scale: 0.15,
+        position: [-2.1, 0.8, -2.0],
+        rotation: [0, getRandomYRotation(), 0],
+      },
+      {
+        scale: 0.15,
+        position: [-0.3, 0.8, 2.5],
+        rotation: [0, getRandomYRotation(), 0],
+      },
+      {
+        scale: 0.15,
+        position: [-0.3, 0.8, 4.7],
+        rotation: [0, getRandomYRotation(), 0],
+      },
+      {
+        scale: 0.15,
+        position: [1.5, 0.8, -2.0],
+        rotation: [0, getRandomYRotation(), 0],
+      },
+      {
+        scale: 0.15,
+        position: [1.5, 0.8, 0.3],
+        rotation: [0, getRandomYRotation(), 0],
+      },
+      {
+        scale: 0.15,
+        position: [1.5, 0.8, 2.5],
+        rotation: [0, getRandomYRotation(), 0],
+      },
+      {
+        scale: 0.15,
+        position: [1.5, 0.8, 4.7],
+        rotation: [0, getRandomYRotation(), 0],
+      },
+      {
+        scale: 0.15,
+        position: [3.3, 0.8, -2.0],
+        rotation: [0, getRandomYRotation(), 0],
+      },
+      {
+        scale: 0.15,
+        position: [3.3, 0.8, 0.3],
+        rotation: [0, getRandomYRotation(), 0],
+      },
+      {
+        scale: 0.15,
+        position: [3.3, 0.8, 4.7],
+        rotation: [0, getRandomYRotation(), 0],
+      },
+    ],
+    []
+  );
+
   return (
     <>
       <XROrigin position={playerPosition} />
@@ -66,14 +149,16 @@ export const Experience = () => {
 
       <OrbitControls />
 
-      <mesh
-        pointerEventsType={{ deny: "grab" }}
-        onClick={() => changeCubeColor()}
-        position={[0, 1, -1]}
-      >
-        <boxGeometry />
-        <meshBasicMaterial color={cubeColor} />
-      </mesh>
+      {laptops.map((laptop, index) => (
+        <Laptop
+          key={index}
+          scale={laptop.scale}
+          position={laptop.position}
+          rotation={laptop.rotation}
+        />
+      ))}
+
+      <Laptop scale={0.15} position={[1.5, 0.8, -2.0]} rotation={[0, 0, 0]} />
 
       <Laptop
         scale={0.15}
