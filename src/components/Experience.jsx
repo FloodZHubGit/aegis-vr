@@ -58,11 +58,6 @@ export const Experience = () => {
     () => [
       {
         scale: 0.15,
-        position: [-2.1, 0.8, -2.0],
-        rotation: [0, getRandomYRotation(), 0],
-      },
-      {
-        scale: 0.15,
         position: [-2.1, 0.8, 0.3],
         rotation: [0, getRandomYRotation(), 0],
       },
