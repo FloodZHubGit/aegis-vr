@@ -11,6 +11,7 @@ export const Computer = () => {
   return (
     <>
       <button onClick={changeCubeColor}>Change Cube Color</button>
+      <p>{cubeColor}</p>
     </>
   );
 };
