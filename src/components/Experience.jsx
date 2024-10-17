@@ -64,6 +64,7 @@ export const Experience = () => {
         position={[0, 1.5, 1]}
         scale={[0.5 * imageAspect1, 0.5, 1]}
         src={image1}
+        pointerEventsType={{ deny: "grab" }}
         onClick={() => clickPhryge()}
       />
 
@@ -72,6 +73,7 @@ export const Experience = () => {
         rotation={[0, Math.PI, 0]}
         scale={[0.5 * videoAspect1, 0.5, 1]}
         src={video1}
+        pointerEventsType={{ deny: "grab" }}
         onClick={() => clickDog()}
       />
 
