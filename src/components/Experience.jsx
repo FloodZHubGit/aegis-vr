@@ -1,5 +1,5 @@
-import { TeleportTarget, XROrigin } from "@react-three/xr";
-import { useRef, useState, useEffect } from "react";
+import { TeleportTarget, XRLayer, XROrigin } from "@react-three/xr";
+import { useRef, useState, useEffect, useMemo } from "react";
 import { Vector3 } from "three";
 import { Classroom } from "./Classroom";
 import { useGameEngine } from "../hooks/useGameEngine";
@@ -8,6 +8,13 @@ export const Experience = () => {
   const { players, isStarted, setSelectedRole, cubeColor, changeCubeColor } =
     useGameEngine();
   const [playerPosition, setPlayerPosition] = useState(new Vector3());
+
+  const image1 = useMemo(() => {
+    const result = document.createElement("img");
+    // find image in public/images/phryge.png
+    result.src = "/images/phryge.png";
+    return result;
+  }, []);
 
   return (
     <>
@@ -29,6 +36,13 @@ export const Experience = () => {
         <boxGeometry />
         <meshBasicMaterial color={cubeColor} />
       </mesh>
+
+      <XRLayer
+        position={[0, 1.5, -0.5]}
+        onClick={() => video.play()}
+        scale={0.5}
+        src={image1}
+      />
 
       {/* {targets.map((target) => (
         <mesh
