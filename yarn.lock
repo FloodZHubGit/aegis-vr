@@ -168,7 +168,7 @@
     uuid "^10.0.0"
     zod "^3.9.8"
 
-"@emotion/is-prop-valid@1.2.2":
+"@emotion/is-prop-valid@*", "@emotion/is-prop-valid@1.2.2":
   version "1.2.2"
   dependencies:
     "@emotion/memoize" "^0.8.1"
@@ -928,6 +928,13 @@ fraction.js@^4.3.7:
   resolved "https://registry.npmjs.org/fraction.js/-/fraction.js-4.3.7.tgz"
   integrity sha512-ZsDfxO51wGAXREY55a7la9LScWpwv9RxIrYABrlvOFBlH/ShPnrtsXeuUIfXKKOVicNxQ+o8JTbJvjS4M89yew==
 
+framer-motion@^11.11.9:
+  version "11.11.9"
+  resolved "https://registry.npmjs.org/framer-motion/-/framer-motion-11.11.9.tgz"
+  integrity sha512-XpdZseuCrZehdHGuW22zZt3SF5g6AHJHJi7JwQIigOznW4Jg1n0oGPMJQheMaKLC+0rp5gxUKMRYI6ytd3q4RQ==
+  dependencies:
+    tslib "^2.4.0"
+
 function-bind@^1.1.2:
   version "1.1.2"
   resolved "https://registry.npmjs.org/function-bind/-/function-bind-1.1.2.tgz"
@@ -1378,6 +1385,7 @@ queue-microtask@^1.2.2:
     "@react-three/fiber" "^8.17.9"
     "@react-three/rapier" "^1.5.0"
     "@react-three/xr" "^6.2.13"
+    lucide-react "^0.453.0"
     playroomkit "^0.0.83"
     r3f-vite-starter "file:"
     react "^18.3.1"
@@ -1392,7 +1400,7 @@ react-composer@^5.0.3:
   dependencies:
     prop-types "^15.6.0"
 
-react-dom@^18.3.1, "react-dom@>= 16.8.0", "react-dom@>=17.0.2 <= 18", react-dom@>=18, react-dom@>=18.0:
+react-dom@^18.0.0, react-dom@^18.3.1, "react-dom@>= 16.8.0", "react-dom@>=17.0.2 <= 18", react-dom@>=18, react-dom@>=18.0:
   version "18.3.1"
   resolved "https://registry.npmjs.org/react-dom/-/react-dom-18.3.1.tgz"
   integrity sha512-5m4nQKp+rZRb09LNH59GM4BxTh9251/ylbKIbpe7TpGxfJ+9kv6BLkLBXIjjspbgbnIBNqlI23tRnTWT0snUIw==
@@ -1739,7 +1747,7 @@ ts-interface-checker@^0.1.9:
   resolved "https://registry.npmjs.org/ts-interface-checker/-/ts-interface-checker-0.1.13.tgz"
   integrity sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==
 
-tslib@2.6.2:
+tslib@^2.4.0, tslib@2.6.2:
   version "2.6.2"
 
 tunnel-rat@^0.1.2:

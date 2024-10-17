@@ -11,6 +11,14 @@ const GameEngineContext = React.createContext();
 export const GameEngineProvider = ({ children }) => {
   const [isStarted, setIsStarted] = useMultiplayerState("isStarted", false);
   const [cubeColor, setCubeColor] = useMultiplayerState("cubeColor", "blue");
+  const [isPhrygeClicked, setIsPhrygeClicked] = useMultiplayerState(
+    "isPhrygeClicked",
+    false
+  );
+  const [isDogClicked, setIsDogClicked] = useMultiplayerState(
+    "isDogClicked",
+    false
+  );
 
   const players = usePlayersList(true);
   players.sort((a, b) => a.id.localeCompare(b.id));
@@ -32,6 +40,14 @@ export const GameEngineProvider = ({ children }) => {
     setCubeColor(randomColor);
   };
 
+  const clickPhryge = () => {
+    setIsPhrygeClicked(true);
+  };
+
+  const clickDog = () => {
+    setIsDogClicked(true);
+  };
+
   const gameState = {
     players,
     isStarted,
@@ -39,6 +55,10 @@ export const GameEngineProvider = ({ children }) => {
     gameSetup,
     cubeColor,
     changeCubeColor,
+    isPhrygeClicked,
+    clickPhryge,
+    isDogClicked,
+    clickDog,
   };
 
   return (

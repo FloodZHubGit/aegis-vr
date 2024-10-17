@@ -5,14 +5,37 @@ import { Classroom } from "./Classroom";
 import { useGameEngine } from "../hooks/useGameEngine";
 
 export const Experience = () => {
-  const { players, isStarted, setSelectedRole, cubeColor, changeCubeColor } =
-    useGameEngine();
+  const {
+    players,
+    isStarted,
+    setSelectedRole,
+    cubeColor,
+    changeCubeColor,
+    clickPhryge,
+    clickDog,
+  } = useGameEngine();
   const [playerPosition, setPlayerPosition] = useState(new Vector3());
+  const [imageAspect1, setImageAspect1] = useState(1);
+  const [videoAspect1, setVideoAspect1] = useState(1);
 
   const image1 = useMemo(() => {
     const result = document.createElement("img");
-    // find image in public/images/phryge.png
     result.src = "/images/phryge.png";
+    result.onload = () => {
+      setImageAspect1(result.width / result.height);
+    };
+    return result;
+  }, []);
+
+  const video1 = useMemo(() => {
+    const result = document.createElement("video");
+    result.src = "/videos/dog.mp4";
+    result.onloadedmetadata = () => {
+      setVideoAspect1(result.videoWidth / result.videoHeight);
+    };
+    result.loop = true;
+    result.muted = true;
+    result.play();
     return result;
   }, []);
 
@@ -38,10 +61,18 @@ export const Experience = () => {
       </mesh>
 
       <XRLayer
-        position={[0, 1.5, -0.5]}
-        onClick={() => video.play()}
-        scale={0.5}
+        position={[0, 1.5, 1]}
+        scale={[0.5 * imageAspect1, 0.5, 1]}
         src={image1}
+        onClick={() => clickPhryge()}
+      />
+
+      <XRLayer
+        position={[0, 1.5, 2]}
+        rotation={[0, Math.PI, 0]}
+        scale={[0.5 * videoAspect1, 0.5, 1]}
+        src={video1}
+        onClick={() => clickDog()}
       />
 
       {/* {targets.map((target) => (
