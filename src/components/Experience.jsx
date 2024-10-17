@@ -3,6 +3,8 @@ import { useRef, useState, useEffect, useMemo } from "react";
 import { Vector3 } from "three";
 import { Classroom } from "./Classroom";
 import { useGameEngine } from "../hooks/useGameEngine";
+import { OrbitControls } from "@react-three/drei";
+import { Laptop } from "./Laptop";
 
 export const Experience = () => {
   const {
@@ -13,9 +15,11 @@ export const Experience = () => {
     changeCubeColor,
     clickPhryge,
     clickDog,
+    clickEmily,
   } = useGameEngine();
   const [playerPosition, setPlayerPosition] = useState(new Vector3());
   const [imageAspect1, setImageAspect1] = useState(1);
+  const [imageAspect2, setImageAspect2] = useState(1);
   const [videoAspect1, setVideoAspect1] = useState(1);
 
   const image1 = useMemo(() => {
@@ -23,6 +27,15 @@ export const Experience = () => {
     result.src = "/images/phryge.png";
     result.onload = () => {
       setImageAspect1(result.width / result.height);
+    };
+    return result;
+  }, []);
+
+  const image2 = useMemo(() => {
+    const result = document.createElement("img");
+    result.src = "/images/emily.jpg";
+    result.onload = () => {
+      setImageAspect2(result.width / result.height);
     };
     return result;
   }, []);
@@ -43,13 +56,12 @@ export const Experience = () => {
     <>
       <XROrigin position={playerPosition} />
       <TeleportTarget onTeleport={setPlayerPosition}>
-        <mesh scale={[10, 1, 10]} position={[0, -0.5, 0]}>
-          <boxGeometry />
-          <meshBasicMaterial color="green" />
-        </mesh>
+        <mesh scale={[10, 1, 14]} position={[0, -0.5, 0]}></mesh>
       </TeleportTarget>
 
-      <Classroom />
+      <Classroom scale={0.9} />
+
+      <OrbitControls />
 
       <mesh
         pointerEventsType={{ deny: "grab" }}
@@ -59,6 +71,12 @@ export const Experience = () => {
         <boxGeometry />
         <meshBasicMaterial color={cubeColor} />
       </mesh>
+
+      <Laptop
+        scale={0.15}
+        position={[0.3, 1.1, -4.5]}
+        rotation={[0, Math.PI, 0]}
+      />
 
       <XRLayer
         position={[0, 1.5, 1]}
@@ -75,6 +93,15 @@ export const Experience = () => {
         src={video1}
         pointerEventsType={{ deny: "grab" }}
         onClick={() => clickDog()}
+      />
+
+      <XRLayer
+        position={[0.3, 1.22, -4.41]}
+        scale={[0.25 * imageAspect2, 0.25, 1]}
+        rotation={[0, Math.PI, 0]}
+        src={image2}
+        pointerEventsType={{ deny: "grab" }}
+        onClick={() => clickEmily()}
       />
 
       {/* {targets.map((target) => (

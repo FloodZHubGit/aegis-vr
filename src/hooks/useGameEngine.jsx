@@ -20,6 +20,11 @@ export const GameEngineProvider = ({ children }) => {
     false
   );
 
+  const [isEmilyClicked, setIsEmilyClicked] = useMultiplayerState(
+    "isEmilyClicked",
+    false
+  );
+
   const players = usePlayersList(true);
   players.sort((a, b) => a.id.localeCompare(b.id));
 
@@ -48,6 +53,10 @@ export const GameEngineProvider = ({ children }) => {
     setIsDogClicked(true);
   };
 
+  const clickEmily = () => {
+    setIsEmilyClicked(true);
+  };
+
   const gameState = {
     players,
     isStarted,
@@ -59,6 +68,8 @@ export const GameEngineProvider = ({ children }) => {
     clickPhryge,
     isDogClicked,
     clickDog,
+    isEmilyClicked,
+    clickEmily,
   };
 
   return (

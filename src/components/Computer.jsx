@@ -11,6 +11,7 @@ export const Computer = () => {
     changeCubeColor,
     isPhrygeClicked,
     isDogClicked,
+    isEmilyClicked,
   } = useGameEngine();
 
   const [articleVerdicts, setArticleVerdicts] = useState({});
@@ -37,14 +38,24 @@ export const Computer = () => {
         'Elon Musk, PDG de Tesla, dévoile "Dogimus", un robot chien conçu pour accomplir le rôle d\'animal de compagnie. Il est capable de rapporter des objets, garder la maison et même sortir se promener. Son prix devrait se situer entre 10 000 et 20 000 dollars.',
       isFake: false,
     },
+    {
+      id: 3,
+      title:
+        "Emmanuel Macron veut empêcher la série Emily in Paris de partir à Rome",
+      source: "X",
+      url: "https://x.com/CerfiaFR/status/1844070832328617993",
+      excerpt:
+        "🇫🇷 FLASH | Emmanuel Macron veut empêcher la série Emily in Paris de partir à Rome : 'Nous allons nous battre. Et nous allons leur demander de rester à Paris ! Emily in Paris à Rome… ça n’a pas de sens.' (Variety)",
+    },
   ];
 
   useEffect(() => {
     const newVisibleArticles = [];
     if (isPhrygeClicked) newVisibleArticles.push(articles[0]);
     if (isDogClicked) newVisibleArticles.push(articles[1]);
+    if (isEmilyClicked) newVisibleArticles.push(articles[2]);
     setVisibleArticles(newVisibleArticles);
-  }, [isPhrygeClicked, isDogClicked]);
+  }, [isPhrygeClicked, isDogClicked, isEmilyClicked]);
 
   const handleVerdict = (id, verdict) => {
     setArticleVerdicts((prev) => ({ ...prev, [id]: verdict }));
@@ -87,7 +98,7 @@ export const Computer = () => {
                 : "bg-gray-700 text-green-400 border border-green-500"
             }`}
           >
-            Real
+            Réel
           </motion.button>
           <motion.button
             whileHover={{ scale: 1.05 }}
