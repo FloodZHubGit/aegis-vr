@@ -56,7 +56,10 @@ export const Experience = () => {
     <>
       <XROrigin position={playerPosition} />
       <TeleportTarget onTeleport={setPlayerPosition}>
-        <mesh scale={[10, 1, 14]} position={[0, -0.5, 0]}></mesh>
+        <mesh scale={[10, 0.9, 14]} position={[0, -0.5, 0]}>
+          <boxGeometry />
+          <meshBasicMaterial color="lightblue" transparent opacity={0.5} />
+        </mesh>
       </TeleportTarget>
 
       <Classroom scale={0.9} />

@@ -36,7 +36,7 @@ export const Computer = () => {
       url: "https://x.com/Pediavenir/status/1845044360238297185",
       excerpt:
         'Elon Musk, PDG de Tesla, dévoile "Dogimus", un robot chien conçu pour accomplir le rôle d\'animal de compagnie. Il est capable de rapporter des objets, garder la maison et même sortir se promener. Son prix devrait se situer entre 10 000 et 20 000 dollars.',
-      isFake: false,
+      isFake: true,
     },
     {
       id: 3,
@@ -46,6 +46,7 @@ export const Computer = () => {
       url: "https://x.com/CerfiaFR/status/1844070832328617993",
       excerpt:
         "🇫🇷 FLASH | Emmanuel Macron veut empêcher la série Emily in Paris de partir à Rome : 'Nous allons nous battre. Et nous allons leur demander de rester à Paris ! Emily in Paris à Rome… ça n’a pas de sens.' (Variety)",
+      isFake: false,
     },
   ];
 
@@ -180,6 +181,16 @@ export const Computer = () => {
         >
           Fake News Detective
         </motion.h1>
+        {/* A l'aide de vos connaissances et d'internet, trouver si les articles sont  */}
+        <motion.p
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="text-center text-lg text-gray-400 mb-8"
+        >
+          Analysez les articles suivants pour déterminer s'ils sont vrais ou
+          faux. Utilisez vos connaissances et internet pour vous aider.
+        </motion.p>
         <AnimatePresence mode="wait">
           {visibleArticles.length > 0 ? (
             <motion.div
@@ -205,46 +216,6 @@ export const Computer = () => {
             </motion.div>
           )}
         </AnimatePresence>
-        <motion.div
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="mt-12 bg-gray-800 bg-opacity-50 backdrop-filter backdrop-blur-lg rounded-xl p-6 border border-gray-700"
-        >
-          <h3 className="font-semibold mb-4 text-xl">Game Status</h3>
-          <div className="grid grid-cols-2 gap-4">
-            <div>
-              <p className="text-sm text-gray-400">
-                Cube Color:{" "}
-                <span className="font-medium" style={{ color: cubeColor }}>
-                  {cubeColor}
-                </span>
-              </p>
-              <p className="text-sm text-gray-400">
-                Phryge Clicked:{" "}
-                <span className="font-medium text-blue-400">
-                  {isPhrygeClicked ? "Yes" : "No"}
-                </span>
-              </p>
-            </div>
-            <div>
-              <p className="text-sm text-gray-400">
-                Dog Clicked:{" "}
-                <span className="font-medium text-blue-400">
-                  {isDogClicked ? "Yes" : "No"}
-                </span>
-              </p>
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={changeCubeColor}
-                className="mt-2 bg-gradient-to-r from-blue-500 to-purple-600 text-white py-2 px-4 rounded-md hover:from-blue-600 hover:to-purple-700 transition-all duration-300"
-              >
-                Change Cube Color
-              </motion.button>
-            </div>
-          </div>
-        </motion.div>
       </div>
     </div>
   );
