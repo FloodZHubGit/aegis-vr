@@ -77,25 +77,38 @@ export const Experience = () => {
 
       <Laptop
         scale={0.15}
-        position={[0.3, 1.1, -4.5]}
-        rotation={[0, Math.PI, 0]}
+        position={[3.5, 0.8, 2.5]}
+        rotation={[0, Math.PI / 2, 0]}
       />
 
       <XRLayer
-        position={[0, 1.5, 1]}
-        scale={[0.5 * imageAspect1, 0.5, 1]}
+        position={[3.41, 0.93, 2.5]}
+        scale={[0.15 * imageAspect1, 0.23, 1]}
+        rotation={[0, Math.PI / 2, 0]}
         src={image1}
         pointerEventsType={{ deny: "grab" }}
         onClick={() => clickPhryge()}
       />
 
+      <Laptop
+        scale={0.15}
+        position={[-2.2, 0.8, 4.7]}
+        rotation={[0, -Math.PI / 2, 0]}
+      />
+
       <XRLayer
-        position={[0, 1.5, 2]}
-        rotation={[0, Math.PI, 0]}
-        scale={[0.5 * videoAspect1, 0.5, 1]}
+        position={[-2.105, 0.93, 4.7]}
+        rotation={[0, -Math.PI / 2, 0]}
+        scale={[0.23 * videoAspect1, 0.23, 1]}
         src={video1}
         pointerEventsType={{ deny: "grab" }}
         onClick={() => clickDog()}
+      />
+
+      <Laptop
+        scale={0.15}
+        position={[0.3, 1.1, -4.5]}
+        rotation={[0, Math.PI, 0]}
       />
 
       <XRLayer
