@@ -60,7 +60,6 @@ export const Computer = () => {
 
   const handleVerdict = (id, verdict) => {
     setArticleVerdicts((prev) => ({ ...prev, [id]: verdict }));
-    // Here you would typically update the game state or send this information to the VR player
   };
 
   const renderArticle = (article) => (
@@ -120,12 +119,13 @@ export const Computer = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.3 }}
             className={`mt-4 p-4 rounded-md ${
-              articleVerdicts[article.id] === "fake"
+              articleVerdicts[article.id] === (article.isFake ? "fake" : "real")
                 ? "bg-green-900 bg-opacity-50"
                 : "bg-red-900 bg-opacity-50"
             }`}
           >
-            {articleVerdicts[article.id] === "fake" ? (
+            {articleVerdicts[article.id] ===
+            (article.isFake ? "fake" : "real") ? (
               <div className="flex items-center text-green-400">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -181,7 +181,6 @@ export const Computer = () => {
         >
           Fake News Detective
         </motion.h1>
-        {/* A l'aide de vos connaissances et d'internet, trouver si les articles sont  */}
         <motion.p
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
