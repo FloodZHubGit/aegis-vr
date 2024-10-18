@@ -140,6 +140,8 @@ export const Experience = () => {
         </mesh>
       </TeleportTarget>
 
+      <OrbitControls />
+
       <Classroom scale={0.9} />
 
       {laptops.map((laptop, index) => (
